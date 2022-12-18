@@ -1,0 +1,87 @@
+
+Question q1
+===========
+*** q1) check_perceptron
+Sanity checking perceptron...
+Sanity checking perceptron weight updates...
+Sanity checking complete. Now training perceptron
+*** PASS: check_perceptron
+
+### Question q1: 6/6 ###
+
+Question q2
+===========
+*** q2) check_regression
+Your final loss is: 0.005000
+*** PASS: check_regression
+
+### Question q2: 6/6 ###
+
+Question q3
+===========
+*** q3) check_digit_classification
+0.9248
+0.9452
+0.9528
+0.9584
+0.966
+0.9672
+0.9672
+0.9668
+0.967
+0.9708
+0.9728
+0.9714
+0.9718
+0.9724
+0.972
+0.9722
+0.9726
+0.972
+0.9716
+0.9718
+0.9718
+0.9708
+0.9718
+0.9726
+0.9718
+0.9738
+0.973
+0.9752
+Your final test set accuracy is: 97.220000%
+*** PASS: check_digit_classification
+
+### Question q3: 6/6 ###
+
+Question q4
+===========
+*** q4) check_lang_id
+Alphabet: abcdefghijklmnopqrstuvwxyzáäèéêëíïñóöúüąćęłńśźż
+
+Traceback (most recent call last):
+  File "autograder.py", line 208, in main
+    fn(tracker)
+  File "autograder.py", line 534, in check_lang_id
+    verify_node(output_node, 'node', (batch_size, len(dataset.language_names)), "LanguageIDModel.run()")
+  File "autograder.py", line 275, in verify_node
+    "{} should return a node object, not None".format(method_name))
+AssertionError: LanguageIDModel.run() should return a node object, not None
+
+*** FAIL
+
+### Question q4: 0/7 ###
+
+Finished at 15:37:03
+
+Provisional grades
+==================
+Question q1: 6/6
+Question q2: 6/6
+Question q3: 6/6
+Question q4: 0/7
+------------------
+Total: 18/25
+
+Your grades are NOT yet registered.  To register your grades, make sure
+to follow your instructor's guidelines to receive credit on your project.
+
