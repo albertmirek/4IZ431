@@ -148,6 +148,14 @@ class DigitClassificationModel(object):
         # Initialize your model parameters here
         "*** YOUR CODE HERE ***"
 
+        self.w1 = nn.Parameter(784, 49)
+        self.w2 = nn.Parameter(49, 98)
+        self.w3 = nn.Parameter(98, 10)
+
+        self.b1 = nn.Parameter(1, 49)
+        self.b2 = nn.Parameter(1, 98)
+        self.b3 = nn.Parameter(1, 10)
+
     def run(self, x):
         """
         Runs the model for a batch of examples.
@@ -164,6 +172,11 @@ class DigitClassificationModel(object):
         """
         "*** YOUR CODE HERE ***"
 
+        l1 = nn.ReLU(nn.AddBias(nn.Linear(x, self.w1), self.b1))
+        l2 = nn.ReLU(nn.AddBias(nn.Linear(l1, self.w2), self.b2))
+        l3 = nn.AddBias(nn.Linear(l2, self.w3), self.b3)
+        return l3
+
     def get_loss(self, x, y):
         """
         Computes the loss for a batch of examples.
@@ -178,12 +191,32 @@ class DigitClassificationModel(object):
         Returns: a loss node
         """
         "*** YOUR CODE HERE ***"
+        return nn.SoftmaxLoss(self.run(x), y)
 
     def train(self, dataset):
         """
         Trains the model.
         """
-        "*** YOUR CODE HERE ***"
+        # "*** YOUR CODE HERE ***"
+        accuracy = -float('inf')
+        lr_rate = -0.15
+        while accuracy < 0.975:
+            for x, y in dataset.iterate_once(80):
+                grad_w1, grad_b1, grad_w2, grad_b2, grad_w3, grad_b3 = nn.gradients(
+                    self.get_loss(x, y),
+                    [
+                        self.w1, self.b1, self.w2, self.b2, self.w3, self.b3
+                    ]
+                )
+                self.w1.update(grad_w1, lr_rate)
+                self.b1.update(grad_b1, lr_rate)
+                self.w2.update(grad_w2, lr_rate)
+                self.b2.update(grad_b2, lr_rate)
+                self.w3.update(grad_w3, lr_rate)
+                self.b3.update(grad_b3, lr_rate)
+            accuracy = dataset.get_validation_accuracy()
+            print(accuracy)
+
 
 
 class LanguageIDModel(object):
